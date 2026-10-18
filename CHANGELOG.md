@@ -1,3 +1,12 @@
+# [2.25.0](https://github.com/gsoulat/formation-data-IA/compare/v2.24.1...v2.25.0) (2026-10-18)
+
+
+### Features
+
+* **briefs:** trois briefs Python de niveau imiter pour le parcours Data Analyst ([e3ba16c](https://github.com/gsoulat/formation-data-IA/commit/e3ba16cee72fc292abaf83529c64e7ca8cb6241d))
+* **kahoot:** quiz Stats et métier Data Analyst, quiz SQL de zéro à expert ([f5b7e58](https://github.com/gsoulat/formation-data-IA/commit/f5b7e58bffb982585db70589ba250855e66f5e11))
+* **maths:** cours de statistiques descriptives à la main, avec renvoi depuis le module tableur ([c0ee09a](https://github.com/gsoulat/formation-data-IA/commit/c0ee09a3dbe56418eb252e909db1a8545290e9e8))
+
 ## [2.24.1](https://github.com/gsoulat/formation-data-IA/compare/v2.24.0...v2.24.1) (2026-09-29)
 
 
