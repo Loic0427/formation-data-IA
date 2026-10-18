@@ -1,3 +1,10 @@
+# [2.26.0](https://github.com/gsoulat/formation-data-IA/compare/v2.25.0...v2.26.0) (2026-10-18)
+
+
+### Features
+
+* **airflow:** réécriture du module en Airflow 3 + Snowflake, fil rouge NYC Taxi ([222ad21](https://github.com/gsoulat/formation-data-IA/commit/222ad21c34a59f6667ef36b046b7d30a61df8670))
+
 # [2.25.0](https://github.com/gsoulat/formation-data-IA/compare/v2.24.1...v2.25.0) (2026-10-18)
 
 
