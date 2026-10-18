@@ -3,108 +3,119 @@
 [← Retour au sommaire](README.md) | [← Précédent](04-creation-warehouse.md) | [Suivant →](06-creation-tables.md)
 
 ## Vue d'ensemble
-Nous allons créer une base de données `SALES_DB` avec un schéma `RAW_DATA` pour organiser nos données de ventes.
+
+Les objets de Snowflake sont emboîtés : un compte contient des **bases de données**, une base contient des **schémas**, un schéma contient les tables, les vues, les stages et les autres objets. Cette organisation sert à deux choses : ranger les données par domaine et par étape de traitement, et donner les droits à chaque étage ([chapitre 8](08-gestion-privileges.md)).
+
+Ce chapitre crée la base `SALES_DB` et le schéma `RAW_DATA`, qui recevra les données brutes. Il introduit aussi la durée de rétention, qui règle le Time Travel.
+
+```
+Compte
+└── SALES_DB                  (base de données)
+    ├── INFORMATION_SCHEMA    (créé automatiquement : vues de métadonnées)
+    ├── PUBLIC                (créé automatiquement : schéma par défaut)
+    └── RAW_DATA              (notre schéma)
+        └── tables, vues, stages...
+```
 
 ---
 
-## Étape 1 : Accéder aux bases de données
-1. Cliquez sur **Data** dans le menu principal
-2. Sélectionnez **Databases** dans le sous-menu
+## 1. Créer la base et le schéma dans Snowsight
 
-![Navigation databases](images/16-databases-navigation.png)
-*Navigation vers les bases de données*
+Prenez le rôle `SYSADMIN`, qui possède le privilège `CREATE DATABASE`.
 
-## Étape 2 : Créer une base de données
-1. Cliquez sur **+ Create Database**
-2. Remplissez les informations :
-   - **Name** : `SALES_DB`
-   - **Comment** : `Base de données pour les données de ventes`
-3. Cliquez sur **Create Database**
+1. Dans le menu, sélectionnez **Catalog**, puis l'explorateur de bases (**Explorer**, affiché sous le titre **Database Explorer**).
+2. Utilisez le bouton de création de base de données de cette page et nommez la base `SALES_DB`, avec le commentaire `Données de ventes`.
+3. Ouvrez `SALES_DB`, puis sélectionnez **+ Schema**. La fenêtre **New Schema** s'ouvre.
+4. **Name** : `RAW_DATA`. Commentaire : `Données brutes importées`. Laissez la case **Managed access** décochée.
+5. Sélectionnez **Create**.
 
+![Création du schéma](images/16-databases-navigation.png)
+*Database Explorer : fenêtre New Schema ouverte depuis le bouton + Schema d'une base*
 
-## Étape 3 : Créer un schéma
-1. Cliquez sur la base de données `SALES_DB` nouvellement créée
-2. Cliquez sur **+ Create Schema**
-3. Configurez le schéma :
-   - **Name** : `RAW_DATA`
-   - **Comment** : `Schéma pour les données brutes importées`
-4. Cliquez sur **Create Schema**
+---
 
-![Création schéma](images/18-schema-creation.png)
-*Création du schéma dans la base de données*
+## 2. SQL équivalent
 
-## Architecture de données recommandée
-
-### Organisation par couches
-```
-SALES_DB/
-├── RAW_DATA/         # Données brutes importées
-├── STAGING/          # Données en cours de transformation
-└── MARTS/            # Données finales pour analyse
-```
-
-### Conventions de nommage
-- **Bases de données** : MAJUSCULES avec underscore
-- **Schémas** : MAJUSCULES avec underscore
-- **Tables** : MAJUSCULES avec underscore
-- **Colonnes** : MAJUSCULES avec underscore
-
-## Paramètres avancés
-
-### Time Travel
-- Permet de récupérer des données supprimées/modifiées
-- Par défaut : 1 jour (Standard Edition)
-- Jusqu'à 90 jours (Enterprise Edition+)
-
-### Data Retention
-Configuration de la période de rétention :
 ```sql
-ALTER DATABASE SALES_DB
-SET DATA_RETENTION_TIME_IN_DAYS = 7;
-```
+USE ROLE SYSADMIN;
 
-## Commandes SQL équivalentes
-```sql
--- Créer la base de données
 CREATE DATABASE IF NOT EXISTS SALES_DB
-    DATA_RETENTION_TIME_IN_DAYS = 7
-    COMMENT = 'Base de données pour les ventes';
+    COMMENT = 'Données de ventes';
 
--- Créer le schéma
-USE DATABASE SALES_DB;
+CREATE SCHEMA IF NOT EXISTS SALES_DB.RAW_DATA
+    COMMENT = 'Données brutes importées';
 
-CREATE SCHEMA IF NOT EXISTS RAW_DATA
-    DATA_RETENTION_TIME_IN_DAYS = 7
-    COMMENT = 'Schéma pour les données brutes';
+SHOW SCHEMAS IN DATABASE SALES_DB;
 ```
 
-## Organisation des données
+`SHOW SCHEMAS` renvoie trois schémas : `RAW_DATA`, plus `PUBLIC` et `INFORMATION_SCHEMA`, créés automatiquement avec toute base.
 
-### Schéma RAW_DATA
-Contiendra les tables :
-- CUSTOMERS : Clients
-- PRODUCTS : Produits
-- ORDERS : Commandes
-- ORDER_ITEMS : Détails commandes
+Créer une base en fait la base courante de la session. Pour travailler ensuite sans répéter les noms complets :
 
-### Schémas additionnels suggérés
-- **STAGING** : Transformations intermédiaires
-- **MARTS** : Tables analytiques finales
-- **ARCHIVE** : Données historiques
+```sql
+USE SCHEMA SALES_DB.RAW_DATA;
+```
 
-## 📝 Bonnes pratiques
+---
 
-1. **Séparer les environnements** : DEV, TEST, PROD
-2. **Documenter** : Toujours ajouter des commentaires
-3. **Sécurité** : Limiter l'accès par rôles
-4. **Backup** : Utiliser Time Travel et clones
+## 3. Organiser les données par couches
+
+Une base se découpe en schémas qui suivent le trajet des données :
+
+| Schéma | Contenu | Créé au |
+|---|---|---|
+| `RAW_DATA` | données brutes, telles qu'elles arrivent des fichiers sources | chapitre 5 |
+| `ANALYTICS` | tables nettoyées et agrégées, prêtes pour l'analyse | [chapitre 10](10-securite.md) |
+
+Les données brutes ne sont jamais modifiées à la main : on les recharge, puis on reconstruit les tables d'analyse à partir d'elles.
+
+Convention de nommage : noms en majuscules, mots séparés par un tiret bas. Snowflake met en majuscules tout nom écrit sans guillemets ; un nom écrit entre guillemets doubles (`"Sales_db"`) garde sa casse et devra toujours être écrit ainsi, ce qui est une source d'erreurs à éviter.
+
+---
+
+## 4. Durée de rétention et Time Travel
+
+Le **Time Travel** permet de relire une table telle qu'elle était dans le passé et de restaurer un objet supprimé (`UNDROP`). La durée pendant laquelle c'est possible est le paramètre `DATA_RETENTION_TIME_IN_DAYS`.
+
+| Édition | Tables permanentes | Tables transitoires et temporaires |
+|---|---|---|
+| Standard | 0 ou 1 jour | 0 ou 1 jour |
+| Enterprise et supérieures | 0 à 90 jours | 0 ou 1 jour |
+
+La valeur par défaut est de 1 jour. Le paramètre se règle au niveau du compte, de la base, du schéma ou de la table ; un objet hérite de la valeur du niveau supérieur s'il n'a pas la sienne.
+
+```sql
+-- Édition Enterprise : 7 jours de Time Travel sur toute la base
+ALTER DATABASE SALES_DB SET DATA_RETENTION_TIME_IN_DAYS = 7;
+
+SHOW DATABASES LIKE 'SALES_DB';      -- colonne retention_time
+```
+
+Une rétention plus longue augmente le stockage facturé, puisque Snowflake conserve les anciennes versions des données. Après la période de Time Travel, les tables permanentes passent en **Fail-safe** pendant 7 jours : seul le support de Snowflake peut alors récupérer les données. Le [chapitre 13](13-stockage-protection.md) détaille ces mécanismes.
+
+---
+
+## À retenir pour la certification
+
+- Hiérarchie des objets : organisation, compte, base de données, schéma, objets de schéma (tables, vues, stages, formats de fichier...).
+- Toute nouvelle base contient deux schémas créés automatiquement : `PUBLIC` et `INFORMATION_SCHEMA`.
+- `DATA_RETENTION_TIME_IN_DAYS` vaut 1 par défaut ; maximum 1 jour en Standard, 90 jours en Enterprise pour les objets permanents, 1 jour pour les tables transitoires et temporaires.
+- Le paramètre se définit au niveau du compte, de la base, du schéma ou de la table.
+- Le Fail-safe dure 7 jours, ne concerne que les tables permanentes, et n'est accessible que par le support de Snowflake.
+- Un nom sans guillemets est stocké en majuscules ; un nom entre guillemets doubles est sensible à la casse.
 
 ## ✅ Points de vérification
-- [ ] Base de données SALES_DB créée
-- [ ] Schéma RAW_DATA créé
-- [ ] Commentaires ajoutés
-- [ ] Navigation possible dans Data Explorer
+- [ ] Base `SALES_DB` créée avec le rôle `SYSADMIN`
+- [ ] Schéma `RAW_DATA` créé
+- [ ] `SHOW SCHEMAS IN DATABASE SALES_DB` renvoie trois schémas
+- [ ] Rétention de la base réglée à 7 jours (édition Enterprise)
+
+## Documentation officielle
+- [Explorer les objets dans Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-data-databases)
+- [CREATE DATABASE](https://docs.snowflake.com/en/sql-reference/sql/create-database)
+- [CREATE SCHEMA](https://docs.snowflake.com/en/sql-reference/sql/create-schema)
+- [Time Travel](https://docs.snowflake.com/en/user-guide/data-time-travel)
 
 ---
 
-[Suivant : Création des tables →](06-creation-tables.md)
+[← Retour au sommaire](README.md) | [← Précédent](04-creation-warehouse.md) | [Suivant →](06-creation-tables.md)

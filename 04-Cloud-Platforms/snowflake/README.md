@@ -1,66 +1,103 @@
-# Guide Snowflake - Interface Graphique
-*Guide débutant pour créer et configurer un environnement Snowflake via l'interface web*
+# Cours Snowflake : de la prise en main à la certification SnowPro Core
 
-## 📚 Table des matières
+Ce cours s'adresse à des apprenants Data Engineer qui découvrent Snowflake. Il part de la création d'un compte d'essai et va jusqu'à la préparation de la certification SnowPro Core. Aucune connaissance préalable de Snowflake n'est nécessaire ; des bases de SQL suffisent.
+
+Chaque chapitre explique d'abord pourquoi on fait un geste et le concept qu'il y a derrière, puis comment le faire, dans l'interface Snowsight et en SQL. Il se termine par une section « À retenir pour la certification ».
+
+## Sommaire
+
+### Partie 1 : prise en main
 
 1. [Création d'un compte Snowflake](01-creation-compte.md)
-2. [Connexion à Snowflake](02-connexion.md)
+2. [Connexion à Snowflake et découverte de Snowsight](02-connexion.md)
 3. [Création d'un rôle personnalisé](03-creation-role.md)
-4. [Création d'un Data Warehouse](04-creation-warehouse.md)
+4. [Création d'un warehouse](04-creation-warehouse.md)
 5. [Création d'une base de données et d'un schéma](05-creation-database-schema.md)
 6. [Création des tables](06-creation-tables.md)
 7. [Import de données CSV](07-import-donnees.md)
 8. [Gestion des privilèges](08-gestion-privileges.md)
-9. [Monitoring et surveillance](09-monitoring.md)
+9. [Suivi de l'activité et des coûts](09-monitoring.md)
+
+### Partie 2 : pratiquer en SQL
+
 10. [Sécurité : rôles, droits et utilisateurs de service en SQL](10-securite.md)
 11. [Charger des fichiers en SQL : format de fichier, stage, PUT et COPY INTO](11-chargement-stage-copy.md)
 
-## 🎯 Objectif de ce guide
+### Partie 3 : concepts pour la certification
 
-Ce guide vous accompagne pas à pas dans la création et la configuration d'un environnement Snowflake complet via l'interface graphique. Chaque section contient des emplacements marqués 🔴 pour ajouter vos propres captures d'écran.
+12. [Architecture de Snowflake](12-architecture.md)
+13. [Stockage, types de tables, Time Travel, Fail-safe, clonage](13-stockage-protection.md)
+14. [Fonctions d'IA, Snowpark, Streamlit et outils](14-ia-applications.md)
+15. [Authentification, politiques réseau, masquage, gouvernance](15-gouvernance.md)
+16. [Snowpipe, export, connecteurs](16-snowpipe-export-connectivite.md)
+17. [Performance et optimisation](17-performance.md)
+18. [Données semi-structurées, streams, tasks, tables dynamiques, fonctions](18-transformation.md)
+19. [Partage de données, Marketplace, réplication](19-collaboration.md)
 
-## 📋 Prérequis
+### Préparer l'examen
 
-- Un navigateur web moderne (Chrome, Firefox, Edge, Safari)
-- Une adresse email valide pour créer un compte
-- Aucune connaissance préalable de Snowflake requise
+- [Plan de révision en 8 jours](certification/PLAN.md)
+- Un quiz par chapitre, dans le dossier [`certification/`](certification/)
+- [Examen blanc n° 1](certification/examen-blanc-1.md)
 
-## 🚀 Démarrage rapide
+## L'examen SnowPro Core (COF-C03)
 
-Si vous êtes pressé, voici les étapes minimales :
-1. [Créer un compte](01-creation-compte.md) - 10 minutes
-2. [Se connecter](02-connexion.md) - 2 minutes
-3. [Créer un warehouse](04-creation-warehouse.md) - 5 minutes
-4. [Créer une base de données](05-creation-database-schema.md) - 5 minutes
+| | |
+|---|---|
+| Nombre de questions | 100 |
+| Durée | 115 minutes |
+| Seuil de réussite | 750 sur 1000 |
+| Langue | disponible en français |
 
-## 📖 Structure des données exemple
+| Domaine (intitulé officiel) | Pondération |
+|---|---|
+| 1.0 Caractéristiques et architecture de l'AI Data Cloud de Snowflake | 31 % |
+| 2.0 Gestion des comptes et gouvernance des données | 20 % |
+| 3.0 Chargement/Déchargement des données et connectivité | 18 % |
+| 4.0 Optimisation des performances, requêtes et transformation | 21 % |
+| 5.0 Collaboration sur les données | 10 % |
 
-Dans ce guide, nous utilisons un exemple de données de ventes e-commerce avec :
-- **CUSTOMERS** : Informations clients
-- **PRODUCTS** : Catalogue produits
-- **ORDERS** : Commandes
-- **ORDER_ITEMS** : Détail des commandes
+Ces chiffres sont ceux de la [page officielle de l'examen en français](https://learn.snowflake.com/en/certifications/snowpro-core-fra-c03/), relevés le 4 octobre 2026 : frais d'inscription de 175 USD, aucun prérequis, passage en ligne surveillé ou en centre d'examen, langues anglais, japonais, coréen, français et espagnol. Le programme étant révisé régulièrement, vérifiez-les avant de vous inscrire. Le guide d'étude détaillé, qui liste les objectifs de chaque domaine, se télécharge depuis cette page.
 
-## 💡 Conseils de navigation
+## Prérequis
 
-- Chaque fichier est autonome et peut être lu indépendamment
-- Les sections sont numérotées pour suivre un ordre logique
-- Les emplacements 🔴 indiquent où ajouter vos captures d'écran
-- Les commandes SQL équivalentes sont parfois fournies pour référence
+- Un navigateur récent (Chrome, Firefox, Edge ou Safari).
+- Une adresse e-mail pour créer un compte d'essai : 30 jours, avec un solde d'usage gratuit, sans carte bancaire. Choisissez l'édition **Enterprise** ([chapitre 1](01-creation-compte.md)).
+- À partir du chapitre 10 : un terminal et Python 3.
 
-## 📝 Notes importantes
+## L'exemple suivi
 
-- **Compte d'essai** : 30 jours gratuits avec 400$ de crédits
-- **Support** : Documentation officielle et communauté Snowflake
-- **Sécurité** : Toujours suivre les bonnes pratiques de sécurité
+Tous les chapitres travaillent sur le même exemple de ventes en ligne :
 
-## 🔗 Ressources utiles
+| Objet | Nom |
+|---|---|
+| Warehouse | `SALES_WH` |
+| Base de données | `SALES_DB` |
+| Schémas | `RAW_DATA` (données brutes), `ANALYTICS` (tables d'analyse) |
+| Tables de la partie 1 | `CUSTOMERS`, `PRODUCTS`, `ORDERS`, `ORDER_ITEMS` |
+| Rôles | `SALES_ANALYST` (lecture), `SALES_ENGINEER` (chargement et transformation) |
 
-- [Documentation officielle Snowflake](https://docs.snowflake.com/)
-- [Snowflake University](https://community.snowflake.com/s/snowflake-university)
-- [Community Forums](https://community.snowflake.com/)
-- [Status Page](https://status.snowflake.com/)
+## Les jeux de données
 
----
+Le dossier `Data/` contient quatre jeux de données au format CSV, pour s'exercer :
 
-*Ce guide fait partie de la documentation Snowflake + DBT pour la transformation de données.*
+| Dossier | Contenu |
+|---|---|
+| `Data/ecommerce/` | clients, produits, catégories, fournisseurs, commandes, lignes de commande, paiements, avis |
+| `Data/finance/` | clients, comptes, transactions |
+| `Data/saas/` | offres, utilisateurs, abonnements, événements d'usage |
+| `Data/airbnb/` | hôtes, annonces, avis (plus de 400 000 lignes), fréquentation touristique par année |
+
+La partie 1 utilise de petits fichiers à créer soi-même ([chapitre 7](07-import-donnees.md)) ; le dossier `Data/` sert à partir du chapitre 11.
+
+## Comment suivre le cours
+
+- Suivez la partie 1 dans l'ordre : chaque chapitre utilise les objets créés au précédent.
+- L'interface Snowsight évolue souvent et ses libellés peuvent différer de ceux du cours. En cas d'écart, fiez-vous à la commande SQL donnée dans chaque chapitre : elle ne dépend pas de l'interface.
+- Surveillez votre solde d'essai et suspendez les warehouses que vous n'utilisez pas ([chapitre 9](09-monitoring.md)).
+
+## Ressources
+
+- [Documentation officielle de Snowflake](https://docs.snowflake.com/)
+- [Page de statut](https://status.snowflake.com/)
+- Le dossier [`Cours/`](Cours/menu.md) : rappels sur l'entrepôt de données et la modélisation

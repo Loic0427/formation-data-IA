@@ -1,6 +1,6 @@
 # 11. Charger des fichiers en SQL : format de fichier, stage, PUT et COPY INTO
 
-[← Retour au sommaire](README.md) | [← Précédent](10-securite.md)
+[← Retour au sommaire](README.md) | [← Précédent](10-securite.md) | [Suivant →](12-architecture.md)
 
 ## Vue d'ensemble
 
@@ -303,4 +303,4 @@ Questions : pourquoi `PUT` a-t-il besoin d'un programme sur votre poste alors qu
 
 ---
 
-[← Retour au sommaire](README.md)
+[← Retour au sommaire](README.md) | [← Précédent](10-securite.md) | [Suivant →](12-architecture.md)
