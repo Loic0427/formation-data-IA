@@ -8,7 +8,7 @@
 | **Niveau** | Intermédiaire |
 | **Modalité** | Individuel |
 | **Technologies** | Python 3.11+, programmation orientée objet (classes abstraites, héritage, polymorphisme), `requests`, `psycopg` (PostgreSQL), `pytest`, logging & fichiers de configuration (`.env` / YAML), Git |
-| **Prérequis** | [POO – concepts](../../../01-Fondamentaux/Python/02-POO-Concepts/) + [POO en Python](../../../01-Fondamentaux/Python/03-POO-Python/) + [Bibliothèque standard](../../../01-Fondamentaux/Python/04-Bibliotheque-Standard/) + [Qualité & tests](../../../01-Fondamentaux/Python/05-Qualite-Tests/) + [Cours SQL](../../../01-Fondamentaux/SQL/) |
+| **Prérequis** | [POO (concepts, Python, UML)](../../../01-Fondamentaux/Python/02-POO/) + [Bibliothèque standard](../../../01-Fondamentaux/Python/04-Bibliotheque-Standard/) + [Qualité & tests](../../../01-Fondamentaux/Python/05-Qualite-Tests/) + [Cours SQL](../../../01-Fondamentaux/SQL/) |
 
 ## Contexte
 
@@ -261,8 +261,7 @@ Sans repo GitHub public accessible et sans code versionné, le travail ne peut p
 
 ## Ressources
 
-- [POO – concepts (paradigme objet, héritage, interfaces)](../../../01-Fondamentaux/Python/02-POO-Concepts/)
-- [POO en Python (classes, héritage, méthodes spéciales, exceptions)](../../../01-Fondamentaux/Python/03-POO-Python/)
+- [POO (classes, encapsulation, héritage, classes abstraites, méthodes spéciales, exceptions, UML)](../../../01-Fondamentaux/Python/02-POO/)
 - [Bibliothèque standard (fichiers I/O, context managers, type hints, dataclasses, environnement)](../../../01-Fondamentaux/Python/04-Bibliotheque-Standard/)
 - [Qualité & tests (pytest, couverture, logging structuré, analyse statique)](../../../01-Fondamentaux/Python/05-Qualite-Tests/)
 - [Cours SQL](../../../01-Fondamentaux/SQL/)
