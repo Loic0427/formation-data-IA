@@ -32,6 +32,8 @@ le SQL et des ponts vers le ML et la gestion de projet.
 | **S3** | [Recueil du besoin métier](15-Business-Intelligence/03-Analyse-Besoin-Metier/) · [Statistiques descriptives](01-Fondamentaux/Mathematiques/03-Statistiques-Descriptives/) | [S03 — Fondations statistiques des ventes](99-Brief/Data-Analyst/briefs-hebdo/semaine-03-stats-mini-analyse.md) |
 
 ### 🧮 Phase Maths & Python (S4-S5 · 70 h)
+
+> Les dossiers Python [01-Syntaxe](01-Fondamentaux/Python/01-Syntaxe/) et [02-POO](01-Fondamentaux/Python/02-POO/) se ferment par trois briefs courts de niveau imiter : [PY1, PY2, PY3](99-Brief/Data-Analyst/briefs-python/).
 *Sécuriser le socle statistique de l'analyse.*
 
 | Sem. | Cours associé | 🎯 Brief de la semaine |

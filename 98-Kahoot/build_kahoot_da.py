@@ -1,6 +1,8 @@
 """Génère deux quiz Kahoot (format d'import officiel) pour le parcours Data Analyst :
 - Kahoot_DataAnalyst_Maths_25Questions.xlsx : moyenne, médiane, quartiles, écart-type, % (cours 00 à 02)
 - Kahoot_DataAnalyst_Git_Bash_25Questions.xlsx : commandes de base (semaine 1), niveau facile
+- Kahoot_DataAnalyst_Stats_Metier_30Questions.xlsx : stats descriptives + métier de data analyst (distracteurs humoristiques)
+- Kahoot_DataAnalyst_Stats_Metier_30Questions_v2.xlsx : même thème, 30 autres questions
 
 Usage : uv run --with openpyxl python build_kahoot_da.py
 Chaque question est écrite avec la BONNE réponse en premier ; le script mélange l'ordre (graine fixe)
@@ -73,8 +75,80 @@ GIT_BASH = [
 ]
 
 
-def construire(questions, nom, graine):
-    assert len(questions) == 25, (nom, len(questions))
+STATS_METIER = [
+    # --- Le métier de data analyst (17) ---
+    ("Quel logiciel un data analyst utilise-t-il pour créer des tableaux de bord ?", ["Power BI", "Morpion", "Paint", "Minecraft"], 20),
+    ("Quel langage sert à interroger une base de données ?", ["SQL", "Le morse", "Le latin", "HTML"], 20),
+    ("Quel langage de programmation est le plus utilisé par les data analysts ?", ["Python", "Le klingon", "Scratch", "Fortran 77"], 20),
+    ("Quel outil Google permet de faire des tableaux de bord gratuitement ?", ["Looker Studio", "Google Maps", "Gmail", "YouTube"], 20),
+    ("Quel format de fichier texte stocke des données séparées par des virgules ?", ["CSV", "MP3", "JPEG", "GIF"], 20),
+    ("Quelle bibliothèque Python sert à manipuler des tableaux de données ?", ["pandas", "pingouins", "Tetris", "Wordle"], 20),
+    ("Que signifie KPI ?", ["Key Performance Indicator", "Kebab Pizza Intégral", "Keep Playing Immediately", "Kilo Par Instant"], 30),
+    ("Que fait un data analyst en premier quand il reçoit une demande ?", ["Il clarifie le besoin métier", "Il fait un camembert 3D", "Il envoie un mail à tout le monde", "Il achète un nouvel écran"], 30),
+    ("Que veut dire « nettoyer les données » ?", ["Corriger doublons, vides et erreurs", "Passer l'éponge sur l'écran", "Supprimer toutes les lignes", "Mettre les chiffres en gras"], 30),
+    ("Un dashboard, c'est…", ["Un tableau de bord d'indicateurs", "Un tableau de bord de voiture", "Une planche de skate", "Un jeu de société"], 20),
+    ("Que signifie BI ?", ["Business Intelligence", "Bureau Indépendant", "Big Internet", "Bière Intégrale"], 20),
+    ("À qui un data analyst présente-t-il ses résultats ?", ["Aux décideurs métier", "À son chat", "À personne, c'est secret", "Au robot aspirateur"], 20),
+    ("Quel outil versionne le code et les scripts d'un analyste ?", ["Git", "Une clé USB", "Un post-it", "Une photocopieuse"], 20),
+    ("Quel graphique évite-t-on pour comparer 12 catégories ?", ["Le camembert", "Le diagramme en barres", "Le tableau", "Le nuage de points"], 30),
+    ("Les étapes d'une analyse : collecter, puis…", ["Nettoyer, analyser, restituer", "Restituer, analyser, nettoyer", "Dormir, analyser, restituer", "Analyser, collecter, nettoyer"], 30),
+    ("Le RGPD protège…", ["Les données personnelles", "Les recettes de cuisine", "Les fichiers Excel", "Les mots de passe Wi-Fi"], 20),
+    ("Tableau, Power BI et Looker Studio sont des outils de…", ["Data visualisation", "Montage vidéo", "Jeux vidéo", "Retouche photo"], 20),
+    # --- Statistiques descriptives (13) ---
+    ("Laquelle est une variable qualitative ?", ["La couleur des yeux", "La taille en cm", "Le salaire", "L'âge"], 20),
+    ("Quelle est la moyenne de 10, 20, 30, 40 ?", ["25", "30", "20", "100"], 20),
+    ("Médiane de 5, 1, 9, 3, 7 (attention, la série n'est pas triée) ?", ["5", "9", "1", "3"], 30),
+    ("Mode de « bleu, vert, bleu, rouge, bleu » ?", ["Bleu", "Vert", "Rouge", "Il n'y en a pas"], 20),
+    ("Un « outlier » (valeur aberrante), c'est…", ["Une valeur très éloignée des autres", "Une valeur en anglais", "Une valeur vide", "La valeur du milieu"], 20),
+    ("Q1 = 50 et Q3 = 80. L'écart interquartile vaut…", ["30", "130", "65", "80"], 30),
+    ("Un écart-type de 0 signifie…", ["Toutes les valeurs sont identiques", "Il y a une erreur", "La moyenne vaut 0", "Il n'y a aucune valeur"], 30),
+    ("Même moyenne 12, écarts-types 1 et 5. Quelle classe est la plus homogène ?", ["Celle avec l'écart-type 1", "Celle avec l'écart-type 5", "Les deux", "Impossible à dire"], 30),
+    ("3 ventes sur 4 sont livrées. En pourcentage ?", ["75 %", "34 %", "43 %", "25 %"], 20),
+    ("Un salaire passe de 2 000 € à 2 100 €. Évolution ?", ["+5 %", "+10 %", "+100 %", "+1 %"], 30),
+    ("Le minimum est 10, le maximum est 50. L'étendue vaut…", ["40", "60", "30", "50"], 20),
+    ("Quel graphique montre la médiane, Q1, Q3 et les extrêmes ?", ["La boîte à moustaches", "Le camembert", "La courbe", "Le nuage de points"], 20),
+    ("« 4,5 enfants par foyer en moyenne » signifie…", ["Une valeur calculée, pas un vrai foyer", "Qu'un foyer a 4,5 enfants", "Une erreur de calcul", "Que la médiane est 4,5"], 30),
+]
+
+
+STATS_METIER_2 = [
+    # --- Le métier de data analyst (15) ---
+    ("Quel outil de Power BI sert à nettoyer et transformer les données ?", ["Power Query", "Power Point", "Power Rangers", "Power Nap"], 20),
+    ("Quel langage de formules utilise Power BI ?", ["DAX", "DOX", "LOL", "ABBA"], 20),
+    ("Dans Excel, quel outil résume un grand tableau en quelques clics ?", ["Le tableau croisé dynamique", "Le tableau périodique", "La chaise croisée", "Le tableau de Picasso"], 20),
+    ("Quel outil open source crée des tableaux de bord sur une base SQL ?", ["Metabase", "Metaverse", "Métro", "Météo France"], 20),
+    ("Quel outil permet d'écrire du code Python et du texte dans le même document ?", ["Jupyter", "Saturne", "Bloc-notes", "Word"], 20),
+    ("Que signifie ETL ?", ["Extract, Transform, Load", "Écrire Toujours Lentement", "Excel Tableau Looker", "Envoyer Tout Lundi"], 30),
+    ("Un graphique montre une chute de 40 % des ventes. Le data analyst…", ["Vérifie la donnée avant d'alerter", "Publie sur LinkedIn", "Supprime la ligne", "Ferme l'ordinateur"], 30),
+    ("Un « doublon », c'est…", ["Une ligne présente deux fois", "Un double café", "Une colonne vide", "Un graphique en deux couleurs"], 20),
+    ("Que signifie NULL dans une base de données ?", ["Une valeur absente", "Zéro", "Une insulte", "Le texte « null »"], 20),
+    ("Un bon titre de graphique…", ["Dit le message clé", "Dit « Graphique 1 »", "Est en Comic Sans", "Est absent"], 20),
+    ("Le data analyst documente son travail pour…", ["Que d'autres le comprennent et le refassent", "Faire joli", "Gagner du temps de pause", "Personne"], 20),
+    ("Quel format échange des données entre applications web ?", ["JSON", "JASON", "JPEG", "JOJO"], 20),
+    ("Lequel n'est PAS un métier de la data ?", ["Data Sommelier", "Data Analyst", "Data Engineer", "Data Scientist"], 20),
+    ("Que fait le data engineer pour le data analyst ?", ["Il construit les pipelines de données", "Il conduit les trains", "Il répare les écrans", "Il fait les cafés"], 20),
+    ("Pour montrer une évolution dans le temps, on utilise…", ["Une courbe", "Un camembert", "Un tableau", "Une carte"], 20),
+    # --- Statistiques descriptives (15) ---
+    ("Moyenne de 3, 3, 3, 3 ?", ["3", "12", "9", "0"], 10),
+    ("Moyenne de 0, 0, 0, 100 ?", ["25", "100", "0", "50"], 20),
+    ("Sur 0, 0, 0, 100, la médiane vaut…", ["0", "25", "50", "100"], 20),
+    ("Une série peut avoir plusieurs modes.", ["Vrai", "Faux"], 10),
+    ("Le mode s'applique aussi aux variables qualitatives (ex. : couleur).", ["Vrai", "Faux"], 10),
+    ("Un salaire au 9e décile (D9) est…", ["Plus haut que 90 % des salaires", "Plus bas que 90 % des salaires", "Égal à la moyenne", "Égal à la médiane"], 30),
+    ("Le coefficient de variation, c'est…", ["Écart-type ÷ moyenne", "Moyenne ÷ écart-type", "Max − min", "Q3 − Q1"], 30),
+    ("Q1 = 10, Q3 = 30. Une valeur de 70 est…", ["Probablement aberrante (> Q3 + 1,5 × IQR)", "Normale", "La médiane", "Le mode"], 60),
+    ("Variance de 2, 4, 6 (moyenne 4, divisé par n) ?", ["8/3 ≈ 2,67", "4", "2", "0"], 60),
+    ("Dans une distribution symétrique…", ["Moyenne ≈ médiane", "Moyenne >> médiane", "Moyenne << médiane", "Il n'y a pas de médiane"], 20),
+    ("40 « oui » sur 200 réponses. Fréquence relative ?", ["20 %", "40 %", "5 %", "0,4 %"], 20),
+    ("Un histogramme représente…", ["Une variable quantitative continue", "Une liste de noms", "Des couleurs", "Un tableau croisé"], 20),
+    ("« L'entreprise a doublé ses ventes. » En pourcentage ?", ["+100 %", "+200 %", "+50 %", "+2 %"], 30),
+    ("Note moyenne de 4/5 avec seulement 2 avis. C'est…", ["Peu fiable, trop peu d'avis", "Très fiable", "Une note parfaite", "Impossible"], 20),
+    ("Quelle fonction Google Sheets calcule l'écart-type ?", ["STDEV", "ECART", "SIGMA", "AVERAGE"], 20),
+]
+
+
+def construire(questions, nom, graine, nb=25):
+    assert len(questions) == nb, (nom, len(questions))
     rnd = random.Random(graine)
     dest = HERE / nom
     shutil.copy(TEMPLATE, dest)
@@ -98,9 +172,11 @@ def construire(questions, nom, graine):
         ws.cell(r, 8, str(ordre.index(bonne) + 1))
         positions.append(ordre.index(bonne) + 1)
     wb.save(dest)
-    print(f"{nom} : 25 questions · bonnes réponses en position 1/2/3/4 : "
+    print(f"{nom} : {nb} questions · bonnes réponses en position 1/2/3/4 : "
           f"{[positions.count(k) for k in (1, 2, 3, 4)]}")
 
 
 construire(MATHS, "Kahoot_DataAnalyst_Maths_25Questions.xlsx", 11)
 construire(GIT_BASH, "Kahoot_DataAnalyst_Git_Bash_25Questions.xlsx", 22)
+construire(STATS_METIER, "Kahoot_DataAnalyst_Stats_Metier_30Questions.xlsx", 33, nb=30)
+construire(STATS_METIER_2, "Kahoot_DataAnalyst_Stats_Metier_30Questions_v2.xlsx", 44, nb=30)

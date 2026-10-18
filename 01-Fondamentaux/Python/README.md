@@ -2,7 +2,7 @@
 
 ## Presentation
 
-Ce cours couvre Python de maniere generaliste, du niveau debutant au niveau expert. Il est structure en **7 sections thematiques**, accompagnees d'**exercices** et de **briefs** (projets de validation).
+Ce cours couvre Python de maniere generaliste, du niveau debutant au niveau expert. Il est structure en **6 sections thematiques**, accompagnees d'**exercices** et de **briefs** (projets de validation).
 
 > **Note :** Le SQL est traite dans d'autres modules de la formation (voir `05-Databases/`). Ce cours se concentre exclusivement sur Python.
 
@@ -23,60 +23,40 @@ Ce cours couvre Python de maniere generaliste, du niveau debutant au niveau expe
 
 ## Sommaire
 
-### 01 - Syntaxe (~12h)
+### 01 - Syntaxe (~10h30)
 
-Les fondamentaux du langage Python : types, structures de controle, fonctions, modules.
-
-| # | Notebook | Duree | Niveau |
-|---|----------|-------|--------|
-| 01 | [Introduction et installation](01-Syntaxe/01-introduction-installation.ipynb) | 45 min | Debutant |
-| 02 | [Identifiants et conventions](01-Syntaxe/02-identifiants-conventions.ipynb) | 45 min | Debutant |
-| 03 | [Variables et types numeriques](01-Syntaxe/03-variables-types-numeriques.ipynb) | 45 min | Debutant |
-| 04 | [Affichage formate](01-Syntaxe/04-affichage-formate.ipynb) | 45 min | Debutant |
-| 05 | [Strings](01-Syntaxe/05-strings.ipynb) | 45 min | Debutant |
-| 06 | [Listes](01-Syntaxe/06-listes.ipynb) | 45 min | Debutant |
-| 07 | [Tuples](01-Syntaxe/07-tuples.ipynb) | 30 min | Debutant |
-| 08 | [Dictionnaires](01-Syntaxe/08-dictionnaires.ipynb) | 45 min | Debutant |
-| 09 | [Sets](01-Syntaxe/09-sets.ipynb) | 30 min | Debutant |
-| 10 | [Conditions et operateurs](01-Syntaxe/10-conditions-operateurs.ipynb) | 45 min | Debutant |
-| 11 | [Boucles et iterations](01-Syntaxe/11-boucles-iterations.ipynb) | 45 min | Debutant |
-| 12 | [Fonctions et documentation](01-Syntaxe/12-fonctions-documentation.ipynb) | 60 min | Debutant |
-| 13 | [Lambda et comprehensions](01-Syntaxe/13-lambda-comprehensions.ipynb) | 45 min | Intermediaire |
-| 14 | [Generateurs](01-Syntaxe/14-generateurs.ipynb) | 45 min | Intermediaire |
-| 15 | [Modules et packages](01-Syntaxe/15-modules-packages.ipynb) | 45 min | Intermediaire |
-| 16 | [Dates et fuseaux horaires](01-Syntaxe/16-dates-fuseaux-horaires.ipynb) | 45 min | Intermediaire |
-| -- | [CHEATSHEET Syntaxe](01-Syntaxe/CHEATSHEET-syntaxe.ipynb) | ref. | -- |
-
-### 02 - POO Concepts (~5h)
-
-Theorie de la programmation orientee objet et UML, independante du langage.
+Les fondamentaux du langage en 4 notebooks de demonstration (cours dense, une cellule par point, code a executer en direct). Chaque cours est suivi de son notebook d'exercices de niveau **imiter** : un exercice par geste vu en cours, avec une cellule de verification automatique (`assert`) apres chacun. Les corriges ne sont pas dans ce depot.
 
 | # | Notebook | Duree | Niveau |
 |---|----------|-------|--------|
-| 01 | [Paradigme objet](02-POO-Concepts/01-paradigme-objet.ipynb) | 45 min | Intermediaire |
-| 02 | [Classes, attributs, methodes](02-POO-Concepts/02-classes-attributs-methodes.ipynb) | 45 min | Intermediaire |
-| 03 | [Encapsulation](02-POO-Concepts/03-encapsulation.ipynb) | 45 min | Intermediaire |
-| 04 | [Heritage et polymorphisme](02-POO-Concepts/04-heritage-polymorphisme.ipynb) | 60 min | Intermediaire |
-| 05 | [Associations et interfaces](02-POO-Concepts/05-associations-interfaces.ipynb) | 45 min | Intermediaire |
-| 06 | [UML et design patterns](02-POO-Concepts/06-uml-design-patterns.ipynb) | 45 min | Intermediaire |
-| -- | [CHEATSHEET POO Concepts](02-POO-Concepts/CHEATSHEET-poo-concepts.ipynb) | ref. | -- |
+| 01 | [Les bases : installation, conventions, types, print, input](01-Syntaxe/01-bases.ipynb) | 90 min | Debutant |
+| 02 | [Exercices - Les bases](01-Syntaxe/02-exercices-bases.ipynb) | 60 min | Debutant |
+| 03 | [Structures de donnees : str, list, tuple, dict, set](01-Syntaxe/03-structures-donnees.ipynb) | 2 h | Debutant |
+| 04 | [Exercices - Structures de donnees](01-Syntaxe/04-exercices-structures-donnees.ipynb) | 60 min | Debutant |
+| 05 | [Controle de flux et fonctions : if, match, boucles, def, lambda, comprehensions](01-Syntaxe/05-controle-fonctions.ipynb) | 2 h | Debutant |
+| 06 | [Exercices - Controle de flux et fonctions](01-Syntaxe/06-exercices-controle-fonctions.ipynb) | 60 min | Debutant |
+| 07 | [Generateurs, modules et dates](01-Syntaxe/07-generateurs-modules-dates.ipynb) | 90 min | Intermediaire |
+| 08 | [Exercices - Generateurs, modules et dates](01-Syntaxe/08-exercices-generateurs-modules-dates.ipynb) | 60 min | Intermediaire |
 
-### 03 - POO Python (~8h)
+### 02 - POO (~11h30)
 
-Implementation concrete de la POO en Python.
+Programmation orientee objet en Python, de la premiere classe aux patrons de conception, en 5 notebooks de demonstration (meme format que 01-Syntaxe : une cellule de code par point, section « Pieges » en fin de cours). Chaque cours est suivi de son notebook d'exercices de niveau **imiter**, un exercice par geste vu en cours, avec une cellule de verification automatique (`assert`) apres chacun. Les corriges ne sont pas dans ce depot.
+
+> Les anciens dossiers `02-POO-Concepts` et `03-POO-Python` ont ete fusionnes ici. Le numero 03 n'est plus utilise.
 
 | # | Notebook | Duree | Niveau |
 |---|----------|-------|--------|
-| 01 | [Classes et instanciation](03-POO-Python/01-classes-instanciation.ipynb) | 45 min | Intermediaire |
-| 02 | [Constructeurs et destructeurs](03-POO-Python/02-constructeurs-destructeurs.ipynb) | 45 min | Intermediaire |
-| 03 | [Encapsulation et visibilite](03-POO-Python/03-encapsulation-visibilite.ipynb) | 45 min | Intermediaire |
-| 04 | [Heritage simple et multiple](03-POO-Python/04-heritage-simple-multiple.ipynb) | 60 min | Avance |
-| 05 | [Polymorphisme et duck typing](03-POO-Python/05-polymorphisme-duck-typing.ipynb) | 45 min | Avance |
-| 06 | [Methodes speciales](03-POO-Python/06-methodes-speciales.ipynb) | 60 min | Avance |
-| 07 | [Introspection](03-POO-Python/07-introspection.ipynb) | 45 min | Avance |
-| 08 | [Exceptions et gestion d'erreurs](03-POO-Python/08-exceptions-gestion-erreurs.ipynb) | 60 min | Intermediaire |
-| 09 | [Design patterns Python](03-POO-Python/09-design-patterns-python.ipynb) | 60 min | Avance |
-| -- | [CHEATSHEET POO Python](03-POO-Python/CHEATSHEET-poo-python.ipynb) | ref. | -- |
+| 01 | [Classes et objets : class, __init__, self, attributs, methodes, __repr__](02-POO/01-classes-objets.ipynb) | 90 min | Intermediaire |
+| 02 | [Exercices - Classes et objets](02-POO/02-exercices-classes-objets.ipynb) | 60 min | Intermediaire |
+| 03 | [Encapsulation : visibilite, @property, invariants](02-POO/03-encapsulation.ipynb) | 60 min | Intermediaire |
+| 04 | [Exercices - Encapsulation](02-POO/04-exercices-encapsulation.ipynb) | 45 min | Intermediaire |
+| 05 | [Heritage, polymorphisme et composition : super(), ABC, duck typing](02-POO/05-heritage-polymorphisme-composition.ipynb) | 2 h | Intermediaire |
+| 06 | [Exercices - Heritage, polymorphisme et composition](02-POO/06-exercices-heritage-polymorphisme-composition.ipynb) | 60 min | Intermediaire |
+| 07 | [Methodes speciales et exceptions : __eq__, __lt__, __add__, __len__, try/raise](02-POO/07-methodes-speciales-exceptions.ipynb) | 90 min | Intermediaire |
+| 08 | [Exercices - Methodes speciales et exceptions](02-POO/08-exercices-methodes-speciales-exceptions.ipynb) | 60 min | Intermediaire |
+| 09 | [UML et conception : diagramme de classes, Mermaid, SRP, dataclass, Strategy, Factory](02-POO/09-uml-conception.ipynb) | 60 min | Intermediaire |
+| 10 | [Exercices - UML et conception](02-POO/10-exercices-uml-conception.ipynb) | 45 min | Intermediaire |
+| -- | [CHEATSHEET POO](02-POO/CHEATSHEET-poo.ipynb) | ref. | -- |
 
 ### 04 - Bibliotheque Standard (~8h)
 
@@ -153,7 +133,7 @@ Developpement de jeux 2D avec Pygame.
 |---|----------|-------------------|-------|
 | 01 | [Syntaxe et bases](exercices/exercice-01-syntaxe-bases.ipynb) | 01-Syntaxe | 2h |
 | 02 | [Structures de donnees](exercices/exercice-02-structures-donnees.ipynb) | 01-Syntaxe | 2h |
-| 03 | [Projet POO](exercices/exercice-03-poo-projet.ipynb) | 02 + 03 | 2h |
+| 03 | [Projet POO](exercices/exercice-03-poo-projet.ipynb) | 02-POO | 2h |
 | 04 | [Stdlib et fichiers](exercices/exercice-04-stdlib-fichiers.ipynb) | 04-Stdlib | 2h |
 | 05 | [Data Engineering](exercices/exercice-05-data-engineering.ipynb) | 06-Data | 2h |
 
@@ -162,19 +142,19 @@ Developpement de jeux 2D avec Pygame.
 | # | Brief | Sections validees | Duree |
 |---|-------|-------------------|-------|
 | 01 | [Automatisation de scripts](briefs/brief-01-automatisation-scripts.ipynb) | 01 + 04 | 3h |
-| 02 | [Gestionnaire de bibliotheque](briefs/brief-02-gestionnaire-bibliotheque.ipynb) | 02 + 03 | 3h |
+| 02 | [Gestionnaire de bibliotheque](briefs/brief-02-gestionnaire-bibliotheque.ipynb) | 02-POO | 3h |
 | 03 | [Qualite de code](briefs/brief-03-qualite-code.ipynb) | 05 | 3h |
-| 04 | [Jeu Pygame](briefs/brief-04-jeu-pygame.ipynb) | 07 + 03 | 3h |
+| 04 | [Jeu Pygame](briefs/brief-04-jeu-pygame.ipynb) | 07 + 02 | 3h |
 | 05 | [Pipeline ETL](briefs/brief-05-pipeline-etl.ipynb) | 06 + 04 + 05 | 3h |
 
 ## Planning suggere
 
 | Semaine | Contenu | Duree |
 |---------|---------|-------|
-| 1 | 01-Syntaxe (notebooks 01-11) | ~8h |
-| 2 | 01-Syntaxe (12-16) + exercices 01-02 | ~7h |
-| 3 | 02-POO-Concepts + debut 03-POO-Python | ~7h |
-| 4 | 03-POO-Python + exercice 03 + brief 02 | ~8h |
+| 1 | 01-Syntaxe (cours et exercices 01 a 06) | ~8h |
+| 2 | 01-Syntaxe (cours et exercices 07-08) + exercices 01-02 | ~6h |
+| 3 | 02-POO (cours et exercices 01 a 06) | ~7h |
+| 4 | 02-POO (cours et exercices 07 a 10) + exercice 03 + brief 02 | ~9h |
 | 5 | 04-Bibliotheque-Standard + exercice 04 | ~10h |
 | 6 | 05-Qualite-Tests + brief 01 + brief 03 | ~9h |
 | 7 | 06-Data-Engineering (01-05) | ~5h |
@@ -182,7 +162,7 @@ Developpement de jeux 2D avec Pygame.
 | 9 | 07-Pygame + brief 04 | ~9h |
 | 10 | Brief 05 (Pipeline ETL) + revision | ~6h |
 
-**Duree totale estimee : ~80h**
+**Duree totale estimee : ~78h**
 
 ## Outils recommandes
 

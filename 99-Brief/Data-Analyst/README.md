@@ -44,6 +44,16 @@ Le parcours fonctionne au rythme d'**un brief par semaine**, articulé avec le m
 
 **28 semaines** : 22 briefs hebdomadaires + 4 projets capstone 🏁 (S2, S9, S16, S26-28).
 
+## Briefs Python (Phase Maths & Python, S4-S5)
+
+Trois briefs courts de niveau **imiter** ferment les dossiers Python [01-Syntaxe](../../01-Fondamentaux/Python/01-Syntaxe/) et [02-POO](../../01-Fondamentaux/Python/02-POO/) avant pandas (S6). Détail et kits : [`briefs-python/`](briefs-python/).
+
+| Brief | Durée | Compétences (niv. 1) |
+|---|---|---|
+| [PY1 — Premier script d'analyse : Valenciennes](briefs-python/PY1-syntaxe-analyse-magasin.md) | ½ j | C8, C13 |
+| [PY2 — Suivi des objectifs 2024 en objets](briefs-python/PY2-poo-suivi-objectifs.md) | ½ j | C2, C8 |
+| [PY3 — Consolider Valenciennes et Roubaix](briefs-python/PY3-pipeline-consolidation.md) | 1 j | C8, C13, C2 |
+
 ## Progression pédagogique
 Chaque brief hebdomadaire prépare le projet capstone de sa phase : les savoir-faire sont
 d'abord travaillés isolément (découvrir → adapter), puis assemblés et menés en autonomie dans
